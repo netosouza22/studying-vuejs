@@ -1,0 +1,59 @@
+/* ----------------------------V-FOR-PRODUCTS-------------------------------- */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h3{
+    margin-right: 30px;
+    margin-left: 30px; 
+}
+h4{
+    margin: 5px;
+}
+
+#VF-component-products{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#VF-card{
+    border: 1px solid white;
+    
+    padding: 0px 0px 0px 0px;
+    margin: 10px;
+    background: rgb(147,86,239);
+    background: -moz-linear-gradient(143deg, rgba(147,86,239,1) 0%, rgba(87,9,204,1) 26%);
+    background: -webkit-linear-gradient(143deg, rgba(147,86,239,1) 0%, rgba(87,9,204,1) 26%);
+    background: linear-gradient(143deg, rgba(147,86,239,1) 0%, rgba(87,9,204,1) 26%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#9356ef",endColorstr="#5709cc",GradientType=1); 
+    
+}
+
+#VF-aulas {
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid;
+    
+}
+
+/* ----------------------------Computed-watched-Countries-------------------------------- */
+
+#cw-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#cw-cardCountry{
+    width: 400px;
+    height: 500px;
+
+    border: 1px solid black;
+    margin: 5px;
+
+    
+}

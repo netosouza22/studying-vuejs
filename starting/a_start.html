@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <p>What instrument do you want to buy?</p>
+        <button @click="getInstrument('Guittar')">guittar</button>
+        <button @click="getInstrument('Accordion')">Accordion</button>
+        <button @click="getInstrument('Banjo')">Banjo</button>
+        <button @click="getInstrument('Harp')">Harp</button>
+        <br>
+        <button @click="increment"> Increment </button>
+        <button @click="decrement"> Decrement </button>
+        <p>{{instrument}} {{qnt}}</p>
+    
+    </div>
+
+    <div id="appFetch">
+        <button @click="getFetch">Pokemon</button>
+        <p>Name: {{pokemon.name}}</p>
+        <p>Id: {{pokemon.id}}</p>
+
+    </div>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                qnt: 0,
+                instrument: ""
+            },
+            // using methods in VueJs
+            methods: {
+                increment() {
+                    
+                    this.qnt >= 10 ? this.stopBuy() : this.qnt++;;
+                },
+                decrement() {
+                    this.qnt > 0 ? this.qnt-- : this.qnt = 0;
+                },
+                getInstrument(instrument) {
+                    this.instrument = instrument;
+                },
+                stopBuy(){
+                    alert('Please, stop! you dont need more than ten');
+                }
+            }
+        });
+
+        const vmFetch = new Vue({
+            el: '#appFetch',
+            data: {
+                pokemon: ''
+            },
+            methods: {
+                async getFetch() {
+                    const res = await fetch('https://pokeapi.co/api/v2/pokemon/2');
+                    this.pokemon = await res.json();
+
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

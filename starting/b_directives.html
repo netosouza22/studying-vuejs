@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <style>
+        #container {
+            height: 300px;
+            width: 300px;
+            border: 1px solid #000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            padding: 0px;
+
+        }
+        #first, #second {
+            height: 150px;
+            width: 145px;
+            border: 1px solid #000;
+            text-align: center;
+        } 
+        h1, p {
+            font-size: 20px;
+            line-height: 0.5;
+        }
+
+        .greater {
+            color: green;
+        }
+
+        .lesser {
+            color: red;
+        }
+
+
+    </style>
+    <div id="app">
+        <!-- <button @click="getStarshipst">get the first starship</button>
+        <button @click="getStarshipnd">get the second starship</button> -->
+
+        <div id="container">
+            <div id="first">
+                <h1 v-bind:class="starshipst.length > starshipnd.length ? 'greater' : 'lesser'">{{starshipst.name}}</h1>
+                <p >{{starshipst.length}}</p>
+                <p >{{starshipst.cargo_capacity}}</p>
+            </div>
+            <div id="second">
+                <h1 v-bind:class="starshipst.length > starshipnd.length ? 'lesser' : 'greater'">{{starshipnd.name}}</h1>
+                <p>{{starshipnd.length}}</p>
+                <p >{{starshipnd.cargo_capacity}}</p>
+            </div>
+
+            <input @keyup="getLetters" type="text">
+        </div>
+
+        <div >
+            
+        </div>
+    </div>
+
+    <script>
+        const vmBind = new Vue({
+            el: '#app',
+            data: {
+                starshipst: {},
+                starshipnd: {},
+            },
+            mounted: function(){
+                this.getStarshipst();
+                this.getStarshipnd();
+            },
+            methods: {
+                getStarshipst() {
+                    fetch('https://swapi.dev/api/starships/12/').then(res => res.json()).then(data => {
+                        this.starshipst = data;
+                    });
+                    console.log(this.starshipst)
+                },
+                getStarshipnd() {
+                    fetch('https://swapi.dev/api/starships/22/').then(res => res.json()).then(data => {
+                        this.starshipnd = data;
+                        console.log(this.starshipnd)
+                    });
+                },
+                getLetters(event) {
+                    console.log(event)
+                }
+            }
+        }); 
+    </script>
+</body>
+</html>

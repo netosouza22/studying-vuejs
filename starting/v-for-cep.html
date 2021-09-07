@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- <input v-model="message" type="text" placeholder="edit me">
+        <p>Message Here: {{message}}</p> -->
+
+    
+            <!-- <input v-model="message" type="text" placeholder="edit me">
+            <p>Message Here: {{message}}</p> -->
+    
+            <button @click="puxaCep">Puxar Cep</button>
+            <div>{{local}}</div>
+            <!-- <ul>
+                <li v-for="(dados, key) in local">
+                    {{key}}: {{dados}}
+                </li>
+            </ul> -->
+    
+            <h1> Encontre os dados do seu cep!</h1>
+            <p v-for="(dados, key) in local">
+                <strong> {{key}}: </strong>{{dados}}</p>
+            <!-- <p><strong>Logradouro:</strong></p>
+            <p><strong>Complemento:</strong></p>
+            <p><strong>Bairro:</strong></p>
+            <p><strong>Localidade:</strong></p>
+            <p><strong>UF:</strong></p> -->
+       
+    </div>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                local: {}
+            },
+            // using methods in VueJs
+            methods: {
+               puxaCep() {
+                   fetch("https://viacep.com.br/ws/62010585/json/").
+                   then(r => r.json()).then(r => {
+                       this.local = r;
+                   })
+               }
+            }
+        });
+
+       
+    </script>
+</body>
+</html>

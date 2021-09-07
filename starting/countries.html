@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <button @click="getCountries">Pegar Paises</button>
+        <div id="cw-container">
+
+            <div id="cw-cardCountry" v-for="pais in paises">
+
+                <img id="cw-imgCountry" v-bind:src= "pais.flag" width="100%" height="200px">
+                <div>
+                    <h1>{{pais.name}} </h1>   
+                    <h2>{{pais.capital}}</h2>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                paises: {},
+            },
+            // using methods in VueJs
+            methods: {
+               getCountries() {
+                   fetch("http://restcountries.eu/rest/v2/all")
+                   .then(r => r.json())
+                   .then(r => {
+                       this.paises = r;
+                   })
+               }
+            },
+        });
+
+       
+    </script>
+</body>
+</html>

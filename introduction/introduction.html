@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <p> Nome: {{nome}}</p>
+        <p> Idade: {{idade}}</p>
+        <p> Curso: {{faculdade.curso}}</p>
+    </div>
+
+
+    <div id="products">
+        <p>Camisas: R$ <span>{{val}}</span></p>
+        <button @click="total++">Adicionar</button>
+        <button @click="total--">Remover</button>
+        <span>Quantidade: <span>{{total}}</span></span>
+
+        <p>Valor Total: {{val * total}} </p>
+    </div>
+
+    <div id="bought">
+        <p> {{name}}, do U want bought this?</p>
+        <button @click="bought = true">yes</button>
+        <button @click="bought = false">not</button>
+        <p v-if="bought">He bought</p>
+        <p v-for="people in peoples"> {{people.name}}: {{people.bought}} </p>
+    </div>
+
+    <script> 
+
+        const vm = new Vue({
+            el: '#app', //Elemento pai
+            data: { //Tem variáveis que serão reativas
+                nome: 'Neto Sousa',
+                idade: '23 anos',
+                faculdade: {
+                    possui: 'sim',
+                    curso: 'Engenharia da Computação',
+                    universidade: 'UFC'
+                }
+            }
+        }); //Função construtora
+
+        const vmRctv = new Vue({
+            el: '#products',
+            data: {
+                val: 49,
+                total: 0, 
+            }
+        });
+
+        const vmBgt = new Vue({
+            el: '#bought',
+            data: {
+                name: "Neto",
+                bought: true,
+                peoples: [
+                    {name: 'João', bought: 'yes'},
+                    {name: 'Carl', bought: 'No'},
+                    {name: 'Lucy', bought: 'yes'},
+                    {name: 'George', bought: 'no'},
+            ]}
+        })
+    </script>
+</body>
+
+</html>

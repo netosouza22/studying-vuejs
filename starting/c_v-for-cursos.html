@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- <input v-model="message" type="text" placeholder="edit me">
+        <p>Message Here: {{message}}</p> -->
+
+        <button @click="puxarAula"> Ver Aulas </button>
+        
+        <div id="VF-component-products" style="text-align: center;">
+            <div id="VF-card" v-for="produto in produtos">
+
+                <h3><a :href="produto.link">{{produto.curso}}</a></h3>
+
+                <div>
+                    <h4>AULAS:</h4>
+                    <div id="VF-aulas" v-for="{nome, tempo} in produto.aulas">
+                        {{nome}}, {{tempo}}   
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+            
+      
+
+    </div>
+    <script>
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                produtos: []
+            },
+            // using methods in VueJs
+            methods: {
+               puxarAula() {
+                   fetch("./assets/cursos.json").
+                   then(r => r.json()).then(r => {
+                       this.produtos = r;
+                       console.log(r);
+                   })
+               }
+            }
+        });
+
+       
+    </script>
+</body>
+</html>
