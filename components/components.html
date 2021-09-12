@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <!-- Automaticamente muda para kebab-case -->
+        <botao-contador></botao-contador>
+        <component-local></component-local>
+    </div>
+
+    <script>
+        //Component Local
+
+        const ComponentLocal = {
+            name: "ComponentLocal",
+            template: `<div>
+                            <button> Component Local </button>
+                        </div>
+                `
+        }
+
+        //Component Global 
+        Vue.component("BotaoContador", {
+            //Data aqui é uma função
+            data() {
+                return {
+                    randColor: 'blue',
+                }
+            },
+            template: `<button @click="changeColor" :style="{ backgroundColor: randColor }"> Cor: {{randColor}} </button>`,
+            methods: {
+                changeColor() {
+                    let color = `hsl(${Math.random() * 360}, 100%, 50%)`
+
+                    this.randColor = color;
+                    console.log(color);
+                }
+            }
+
+        })
+
+        //Isso é uma instância 
+        const vm = new Vue({
+            el: '#app',
+            data: {   //Data aqui é uma propriedade
+            message: 'Socorro!',
+            },
+            components: {
+                ComponentLocal
+            }
+
+        }); 
+    </script>
+    
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+    </style>
+
+</body>
+</html>

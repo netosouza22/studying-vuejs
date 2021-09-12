@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1> {{message}} </h1>
+        <!-- Automaticamente muda para kebab-case -->
+        <product-list 
+            :fruits="fruitList"
+        ></product-list>
+    </div>
+
+    <script type="module"> //Type Module allows import and export components
+        const ProductItem = {
+            name: "ProductItem",
+            //props: ["fruit"],
+            props: {
+                fruit: String,
+            },
+            template: 
+                `<div>
+                    <h1>A fruta {{fruit}} é rica em antioxidantes</h1>
+                </div>`
+            
+        }
+
+        const ProductList = {
+            name: "ProductList",
+            props: {
+                fruits: Array,
+            },
+            components: {
+                ProductItem
+            },
+            updated() {
+                console.log(this.props)
+            },
+            template: `<div>
+                        <ul>
+                            <product-item 
+                                v-for="(fruit, index) in fruits" 
+                                key="index + fruit" 
+                                :fruit="fruit" 
+                            > </product-item>    
+                        </ul>
+                    </div>`,
+
+        }
+
+        Vue.component("ProductList", ProductList)
+        //Isso é uma instância 
+        const vm = new Vue({
+            el: '#app',
+            data: {   //Data aqui é uma propriedade
+            message: 'Learning!',
+            fruitList: ["Laranja", "Uva", "Melancia"]
+            },
+        }); 
+    </script>
+    
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+    </style>
+
+</body>
+</html>
